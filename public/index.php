@@ -1,4 +1,8 @@
+<!DOCTYPE html>
 <?php
+require __DIR__ . '/../app/views/layout/header.php';
+ini_set('display_errors', 0); 
+ ini_set('display_startup_errors', 0);
 session_start();
 
 $page = $_GET['page'] ?? 'login';
@@ -14,6 +18,14 @@ switch ($page) {
 
     case 'reservas':
         include '../app/views/reservas/index.php';
+        break;
+
+    case 'admin':
+        include '../app/views/admin/panel.php';
+        break;
+
+    case 'empleado':
+        include '../app/views/empleado/reservas.php';
         break;
 
     case 'logout':

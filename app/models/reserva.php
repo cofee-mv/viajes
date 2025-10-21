@@ -30,5 +30,21 @@ class Reserva {
         $resultado = $stmt->get_result();
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
+
+    //  Obtener todos los viajes disponibles
+    public function obtenerTodosLosViajes() {
+        $sql = "SELECT * FROM viajes ORDER BY fecha_salida ASC";
+        $resultado = $this->conexion->query($sql);
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+    //  Crear un nuevo viaje (solo admin)
+    public function crearViaje($origen, $destino, $fecha_salida, $fecha_regreso, $precio) {
+        $sql = "INSERT INTO viajes (origen, destino, fecha_salida, fecha_regreso, precio) 
+                VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("ssssd", $origen, $destino, $fecha_salida, $fecha_regreso, $precio);
+        return $stmt->execute();
+    }
 }
 ?>

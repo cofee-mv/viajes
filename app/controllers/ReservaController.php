@@ -9,6 +9,12 @@ class ReservaController {
         return $reservaModel->listarPorUsuario($usuario_id);
     }
 
+    // 🔹 Obtener todos los viajes disponibles
+    public function obtenerViajes() {
+        $reservaModel = new Reserva();
+        return $reservaModel->obtenerTodosLosViajes();
+    }
+
     // 🔹 Crear nueva reserva
     public function crearReserva() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

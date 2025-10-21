@@ -9,7 +9,7 @@ class UsuarioController {
             $nombre = $_POST['nombre'] ?? '';
             $correo = $_POST['correo'] ?? '';
             $password = $_POST['password'] ?? '';
-            $rol = $_POST['rol'] ?? 'usuario';
+            $rol = 'Cliente'; // Rol por defecto para todos los nuevos usuarios
 
             if (!empty($nombre) && !empty($correo) && !empty($password)) {
                 $usuario = new Usuario();
@@ -44,11 +44,14 @@ class UsuarioController {
                     // Guardar datos en sesión
                     $_SESSION['usuario_id'] = $userData['id'];
                     $_SESSION['nombre'] = $userData['nombre'];
+                    $_SESSION['rol_id'] = $userData['rol_id'];
                     $_SESSION['rol'] = $userData['rol'];
 
                     // Redirigir según rol
-                    if ($userData['rol'] === 'admin') {
-                        header('Location: index.php?page=reservas');
+                    if ($userData['rol_id'] == 1) {
+                        header('Location: index.php?page=admin');
+                    } elseif ($userData['rol_id'] == 2) {
+                        header('Location: index.php?page=empleado');
                     } else {
                         header('Location: index.php?page=reservas');
                     }

@@ -52,6 +52,7 @@ class Usuario {
                     u.nombre, 
                     u.email, 
                     u.password_hash AS password, 
+                    u.rol_id,
                     r.nombre_rol AS rol
                 FROM usuarios u
                 INNER JOIN roles r ON u.rol_id = r.id_rol
