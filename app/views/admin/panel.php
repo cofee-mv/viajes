@@ -17,6 +17,26 @@ if (empty($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
     exit;
 }
 
+// Manejar eliminación de reservas
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'eliminar_reserva') {
+    require_once __DIR__ . '/../../controllers/ReservaController.php';
+    
+    $id_reserva = $_POST['id_reserva'] ?? 0;
+    
+    if ($id_reserva > 0) {
+        $reservaController = new ReservaController();
+        if ($reservaController->eliminarReserva($id_reserva)) {
+            echo "<script>alert('✅ Reserva eliminada exitosamente.');</script>";
+            header('Location: index.php?page=admin');
+            exit;
+        } else {
+            $errorEliminar = "⚠️ Error al eliminar la reserva.";
+        }
+    } else {
+        $errorEliminar = "⚠️ ID de reserva inválido.";
+    }
+}
+
 // Manejar creación de nuevo viaje
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'crear_viaje') {
     require_once __DIR__ . '/../../models/reserva.php';
@@ -213,6 +233,11 @@ $resultViajes = $conn->query($queryViajes);
         <!-- Reservas -->
         <div class="bg-white p-6 rounded-xl shadow-lg mb-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">✈️ Todas las Reservas</h2>
+            
+            <?php if (isset($errorEliminar)): ?>
+                <p class="bg-red-100 text-red-600 p-3 mb-4 rounded-lg"><?= $errorEliminar ?></p>
+            <?php endif; ?>
+            
             <div class="overflow-x-auto">
                 <table class="w-full border-collapse">
                     <thead class="bg-green-600 text-white">
@@ -224,6 +249,7 @@ $resultViajes = $conn->query($queryViajes);
                             <th class="p-3 text-left">Pasajeros</th>
                             <th class="p-3 text-left">Total</th>
                             <th class="p-3 text-left">Fecha</th>
+                            <th class="p-3 text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -236,6 +262,15 @@ $resultViajes = $conn->query($queryViajes);
                                 <td class="p-3"><?= htmlspecialchars($reserva['num_pasajeros']) ?></td>
                                 <td class="p-3">$<?= number_format($reserva['total'], 2, ',', '.') ?></td>
                                 <td class="p-3"><?= date('d/m/Y H:i', strtotime($reserva['fecha_reserva'])) ?></td>
+                                <td class="p-3 text-center">
+                                    <form method="POST" onsubmit="return confirm('⚠️ ¿Estás seguro de eliminar esta reserva? Esta acción no se puede deshacer.');" style="display: inline;">
+                                        <input type="hidden" name="accion" value="eliminar_reserva">
+                                        <input type="hidden" name="id_reserva" value="<?= $reserva['id_reserva'] ?>">
+                                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm font-semibold transition">
+                                            🗑️ Eliminar
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         <?php endwhile; ?>
                     </tbody>

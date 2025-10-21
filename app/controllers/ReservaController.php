@@ -33,5 +33,11 @@ class ReservaController {
             }
         }
     }
+
+    // 🔹 Eliminar una reserva (solo admin)
+    public function eliminarReserva($id_reserva) {
+        $reservaModel = new Reserva();
+        return $reservaModel->eliminar($id_reserva);
+    }
 }
 ?>

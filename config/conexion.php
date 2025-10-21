@@ -2,8 +2,8 @@
 class Conexion {
     public static function conectar() {
         $host = "localhost";
-        $usuario = "root";
-        $password = "";
+        $usuario = "admin";
+        $password = "clave123";
         $bd = "viajes_db";
 
         $conexion = new mysqli($host, $usuario, $password, $bd);

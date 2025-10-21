@@ -46,5 +46,13 @@ class Reserva {
         $stmt->bind_param("ssssd", $origen, $destino, $fecha_salida, $fecha_regreso, $precio);
         return $stmt->execute();
     }
+
+    //  Eliminar una reserva (solo admin)
+    public function eliminar($id_reserva) {
+        $sql = "DELETE FROM reservas WHERE id_reserva = ?";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("i", $id_reserva);
+        return $stmt->execute();
+    }
 }
 ?>
