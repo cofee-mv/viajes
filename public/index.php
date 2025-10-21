@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<link rel="icon" type="image/x-icon" href="../img/favicon_viajes.png">
 <?php
 require __DIR__ . '/../app/views/layout/header.php';
 ini_set('display_errors', 0); 
