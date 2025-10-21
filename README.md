@@ -5,6 +5,8 @@
 
 ---
 
+# Antes de utilizar, se recomienda revisar la configuración de conexión en app/config/conexion.php !!!
+
 ##  Objetivo General:
 
 Desarrollar un sistema funcional que permita:
