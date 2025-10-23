@@ -1,10 +1,11 @@
 <?php session_start(); ?>
+<script src="https://cdn.tailwindcss.com"></script>
 <header class="bg-white shadow absolute w-full top-0 left-0">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex justify-between h-16 items-center">
 			<img src="http://localhost/viajes/img/favicon_viajes.png" alt="logo" class="h-10 w-10"/>
 			<div class="flex-shrink-0">
-				<a href="/viajes/public/index.php?page=login" class="text-lg font-bold text-green-600">Viajes</a>
+				<a href="/viajes/" class="text-lg font-bold text-green-600">Viajes</a>
 			</div>
 			<nav class="hidden md:flex space-x-4">
 				<a href="/viajes/public/index.php?page=login" class="text-gray-600 hover:text-green-600">Iniciar
