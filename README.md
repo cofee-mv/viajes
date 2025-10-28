@@ -31,5 +31,5 @@ Separación de lógica, datos y vistas bajo el modelo **MVC**
 
 ---
 
-[Documentación del proyecto](https://drive.google.com/file/d/1wh-oCf58tHi1-VjBgv1HleDztrV9vCZF/view?usp=sharing)
+[Documentación del proyecto](https://docs.google.com/document/d/1IuZw_HAogp9sNs4nk5suVOEDA5AoRBi3/edit?usp=sharing&ouid=110782250119339533681&rtpof=true&sd=true)
 
